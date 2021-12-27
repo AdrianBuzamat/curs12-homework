@@ -1,5 +1,6 @@
 package ro.fasttrackit.curs12.homework.ex5;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,8 @@ public class Main {
         System.out.println(carShop.getCarList());
         System.out.println(numberOfSameCars(carShop));
         System.out.println(kmOfSameCars(carShop));
+        System.out.println(carsByRangeKm(carShop, new CarRange(1, 50000)));
+        System.out.println(carsByRangePrice(carShop, new CarRange(500, 5000)));
 
     }
 
@@ -36,6 +39,32 @@ public class Main {
         for (Car car : carShop.getCarList()) {
             result.put(car.name(), sumKmSameCar(carShop, car.name()));
         }
+        return result;
+    }
+
+    public static Map<CarRange, List<Car>> carsByRangeKm(CarShop carShop, CarRange range) {
+        Map<CarRange, List<Car>> result = new HashMap<>();
+        CarRange kmRange = new CarRange(range.lowLimit(), range.highLimit());
+        List<Car> carList = new ArrayList<>();
+        for (Car car : carShop.getCarList()) {
+            if (car.km() > kmRange.lowLimit() & car.km() < kmRange.highLimit()) {
+                carList.add(car);
+            }
+        }
+        result.put(kmRange, carList);
+        return result;
+    }
+
+    public static Map<CarRange, List<Car>> carsByRangePrice(CarShop carShop, CarRange range) {
+        Map<CarRange, List<Car>> result = new HashMap<>();
+        CarRange priceRange = new CarRange(range.lowLimit(), range.highLimit());
+        List<Car> carList = new ArrayList<>();
+        for (Car car : carShop.getCarList()) {
+            if (car.price() > priceRange.lowLimit() & car.price() < priceRange.highLimit()) {
+                carList.add(car);
+            }
+        }
+        result.put(priceRange, carList);
         return result;
     }
 
