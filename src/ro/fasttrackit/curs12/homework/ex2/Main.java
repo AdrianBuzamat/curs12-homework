@@ -1,6 +1,5 @@
 package ro.fasttrackit.curs12.homework.ex2;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
